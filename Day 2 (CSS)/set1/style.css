@@ -1,0 +1,84 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* .parent{
+    font-size: 100px;
+}
+.child{
+    font-size: 3em;
+} */
+/* .parent{
+    font-size: 5rem;
+}
+.child{
+    font-size: 2em;
+}
+
+.btn{
+    display: block;
+    padding: 16px;
+    border-radius: 30px;
+    border: none;
+    font-size: 3em;
+    margin: 10px auto;
+    width: 20em;
+    box-shadow: 8px 8px 8px ;
+}
+
+.smallbtn{
+    display: block;
+    padding: 16px;
+    border-radius: 8px;
+    border: none;
+    font-size: 10px;
+    margin: 30px auto;
+    width: 120px;
+    box-shadow: 2px 2px 2px;
+} */ 
+
+body{
+    height: 100vh;
+    width: 100vw;
+    padding: 10px 32px;
+}
+.parent{
+    ol
+    {
+        background-color: rgb(179, 40, 203);
+        li:nth-child(3){        /*this is used while using div*/
+            background-color: cornflowerblue;
+        }
+    }
+    ul{
+        li:nth-of-type(3){                      /* used without using div*/
+            background-color: aqua;
+        }
+    }
+    ul:first-child{
+        background-color: blue;
+    }
+    ul :first-child{
+        width: 50px;
+        background-color: rgb(29, 216, 173);
+    }
+    /* ul :last-child{
+        width: 60px;
+        background-color: green;
+    } */
+    ul:last-child{
+        background-color: chocolate;
+        li:nth-child(2){
+            background-color: yellow;
+        }
+    }
+    
+    
+}
+ul{
+background-color: rgb(160, 107, 27);
+}
+
+
