@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .parent{
     border: 2ox solid red;
     padding: auto;
@@ -9,4 +10,17 @@ h1{
     top: 0px;
     margin: 0px;
     padding: 0px;
+=======
+.parent{
+    border: 2ox solid red;
+    padding: auto;
+    margin: auto;
+}
+h1{
+    background-color: red;
+    position: sticky;
+    top: 0px;
+    margin: 0px;
+    padding: 0px;
+>>>>>>> 337dbe4cde9fe131f11d934f72fd889a2217b15c
 }

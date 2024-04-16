@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .parent{
     width: 100px;
     background-color: aqua;
@@ -9,4 +10,17 @@
     text-align: center;
     background-color: blue;
     width: 100px;
+=======
+.parent{
+    width: 100px;
+    background-color: aqua;
+    text-align: centera;
+    margin: 0px auto;
+}
+.parent1{
+    margin: 0 0 auto;
+    text-align: center;
+    background-color: blue;
+    width: 100px;
+>>>>>>> 337dbe4cde9fe131f11d934f72fd889a2217b15c
 }

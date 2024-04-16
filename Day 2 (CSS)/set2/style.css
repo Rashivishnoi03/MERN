@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* .parent{
     background-color: aqua;
     display: flex;
@@ -49,4 +50,57 @@
     width: 100px;
     flex-basis: 80px;
    
+=======
+/* .parent{
+    background-color: aqua;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+}
+
+.child{
+    background-color: rgb(166, 166, 220);
+    border: 2px solid red;
+    width: 30px;
+    flex-basis: 80px;
+   
+    }
+:nth-child(3){
+    flex-grow: 1;
+    flex-shrink: 1;
+    text-align: center;
+}
+:nth-child(4){
+    flex-grow: 1;
+} */
+
+.parent{
+    background-color: blueviolet;
+   
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.parent1{
+    justify-content: space-around;
+    align-items: baseline;
+}
+.parent2{
+    justify-content: space-between;
+    align-items: baseline;
+}
+.parent3{
+    justify-content: space-evenly;
+}
+.parent4{
+    justify-content: flex-end;
+}
+.child{
+    background-color: rgb(166, 166, 220);
+    border: 2px solid red;
+    width: 100px;
+    flex-basis: 80px;
+   
+>>>>>>> 337dbe4cde9fe131f11d934f72fd889a2217b15c
     }

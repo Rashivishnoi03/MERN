@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 body{
     background-color: blueviolet;
 }
@@ -20,4 +21,28 @@ p{
     transition-property: height,width;
     transition-duration: 3s;
     transition-timing-function: linear;
+=======
+body{
+    background-color: blueviolet;
+}
+h1{
+    background-color: black;
+    color: aliceblue;
+    text-align: center;
+}
+p{
+    text-align: center;
+}
+@media(800px <= width <= 1000px){
+    .parent{
+        background-color: aqua;
+        width: 800px;
+        height: 800px;
+    }
+}
+.parent{
+    transition-property: height,width;
+    transition-duration: 3s;
+    transition-timing-function: linear;
+>>>>>>> 337dbe4cde9fe131f11d934f72fd889a2217b15c
 }
