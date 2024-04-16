@@ -1,0 +1,12 @@
+.parent{
+    border: 2ox solid red;
+    padding: auto;
+    margin: auto;
+}
+h1{
+    background-color: red;
+    position: sticky;
+    top: 0px;
+    margin: 0px;
+    padding: 0px;
+}
