@@ -154,7 +154,7 @@ const htmlTemplete = `
           padding-top: .5em;
           padding-bottom: .5em;
           border: 1px solid #a2a2a2;
-          background-color: pink;
+          background-color: navy;
           -webkit-box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.75);
           -moz-box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.75);
           box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.75);

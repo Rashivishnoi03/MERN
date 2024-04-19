@@ -1,58 +1,27 @@
-// const fs=require('node:fs')
-// const fs=require('fs')
-// const data= fs.readFileSync('./script2.txt',{encoding:'utf8'});  // by utf it changes into string
+const fs = require("fs");
+const http = require("http");
+const url = require("url");
 
-// console.log(data)  // return buffer
-// console.log(data.toString());   // return string
+const data = fs.readFileSync("./data.json","utf8");
+const dataObj = JSON.parse(data).products;
+// console.log(data);
+const inputElement = `
+<form action='/product'>
+<input type = "text" name="productName">
+<button type ="submit">Search</button>
+</form>
+`
+const cardTemplate = `
+<div>
+<h3>$TITLE$</h3>
 
+<img src = "$img_src$" alt = 'product-image' />
 
+<a href = "$product_links$"> MoreInfo</a>
 
-//write filesystem
-// const fs=require('fs')
-// fs.writeFileSync('./logs.txt','this is new file created by writefilrsync command');
-
-
-
-// console.log("start")
-// const fs=require('fs')
-// const data= fs.readFileSync('./script2.txt',{encoding:'utf8'});
-// console.log(data)
-// console.log("end") 
-////////////////////////////////////////////sync call api////////////////////////////////
-
-//promise api
-// const fspromise=require('fs/promises')
-// const pr=fspromise.readFile('./script2.txt',{encoding:'utf8'});
-// pr.then((res)=>
-// {
-//     console.log(res);
-// })
-
-
-/////////////////////////////////////////promise call api/////////////////////////////////////
-
-//callback api
-
-// const fscallback=require('fs');
-// fscallback.readFile('./script2.txt',{encoding:'utf8'},(err,data)=>
-// {
-//     console.log(data)
-
-// });
-
-///////////////////////////////////////////////callback api/////////////////////////////////
-
-
-//////////////////////////////////////server bana rahe hai/////////////////////////////////
-
-
-const http = require('http');
-const fs=require('fs')
-
-const data=fs.readFileSync('./data.json','utf8')
-// console.log(typeof(data))
-const dataobj=JSON.parse(data);
-const product= dataobj.products;
+<h4>$price$</h4>
+</div>
+`;
 
 
 const htmlTemplete = `
@@ -63,11 +32,11 @@ const htmlTemplete = `
         .product-card
         {
            width:400px;
-           height:310px;
-            margin:10px auto;
+           height:300px;
+            margin:20px auto;
             border: 3px double red;
             border-radius:8px;
-            padding-top:0px;
+            padding:16px;
             background-color:blue;
             box-shadow:2px 8px 5px red;
             transition: background-color 0.25s ease
@@ -92,7 +61,7 @@ const htmlTemplete = `
           line-height: 1.6;
           margin: 0;
           min-height: 100vh;
-          background-color:	aquamarine;
+          background-color:green;
         
       }
       ul {
@@ -113,16 +82,13 @@ const htmlTemplete = `
       }
 
       img{
-     width:60px;
-     height:60px;
-     display:block;
-     margin-left:auto;
-     margin-right:auto;
+     width:30px;
+     height:40px;
+
       }
       
       
       .logo {
-        color:white
           margin: 0;
           font-size: 1.45em;
       }
@@ -154,7 +120,7 @@ const htmlTemplete = `
           padding-top: .5em;
           padding-bottom: .5em;
           border: 1px solid #a2a2a2;
-          background-color: pink;
+          background-color: navy;
           -webkit-box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.75);
           -moz-box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.75);
           box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.75);
@@ -240,44 +206,70 @@ const CardTemplete=`
 </div>
 `;
 
-
-
-
-
-
-
-const allCard=product.map((elem)=>
-{
-    let newcard=CardTemplete;
-    newcard=newcard.replace('brand',elem.brand)
-    newcard=newcard.replace('title',elem.title)
-    newcard=newcard.replace('Img',elem.images[0])
-
-
+let result = [];
+for(let i=0;i<dataObj.length;i++){
+    let temp = cardTemplate;
+    temp = temp.replace('$TITLE$',dataObj[i].title); 
+    temp = temp.replace('$img_src$',dataObj[i].images[0]); 
+    temp = temp.replace('$product_links$',`/product?id=${i}`); 
+    // temp = temp.replace('$thumbnail$',dataObj[i].thumbnail); 
     
-    newcard=newcard.replace('info',elem.description)
-     return newcard;
+    temp = temp.replace('$price$',dataObj[i].price); 
+    
+result.push(temp);
+}
+// console.log(result);
+result = result.join('');
+const server = http.createServer((req, res)=>{
+    res.writeHead(200,{
+        'content-type': 'text/html',
+    });
+    // const route = req.url;
+    // console.log('\n',route,'\n');
+    
+    const {pathname,query} = url.parse(req.url , true);
+   console.log('\n',pathname,'\n');
+//  res.end('hello');
+if(pathname =='/home'){
+res.end(inputElement+result);
+}
+else if(pathname =='/product'){
+// res.end('Product Page'+query.id);
+const id = query.id;
+const Item = dataObj[id];
+const pName = query.productName;
+if(pName){
+const searchNameResults = dataObj.filter((elem)=>{
+    if(elem.title.includes(pName)){
+        return true;
+    }
+    else{
+        false;
+    }
 })
+res.end(JSON.stringify(searchNameResults));
+}
+else {
+    res.end('<h3>Error...</h3>');
+}
+res.end(`
+    <div>
+    <h1>${Item.title}</h1>
+    <p style="color:blue">${Item.description}</p>
+    <img src = ${Item.images[0]}>
+    <h5>Rating : ${Item.rating}/5</h5>
+    <h4>Price : ${Item.price}</h4>
+    <h3>Discount : ${Item.discountPercentage}%</h3>
+    </div>
+    `);
 
 
+}
+else{
+res.end(' 404 not Found');
+}
 
-
-// const allCard=card1+card2;
-const page = htmlTemplete.replace(' Product_card',allCard);
-// const card2=CardTemplete
-// .replace('title','SAMSUNG')
-// .replace('info','SAMSUNG')
-
-
-
-const app = http.createServer((req, res) => {
-    console.log('request recieved');
-    console.log(req.url);
-    res.writeHead(200, { 'content-type': 'text/html', })
-    res.end(page);
+//  res.end(result);
 });
 
-
-app.listen(1400, () => {
-    console.log('................server started..................')
-});
+server.listen(1400);
