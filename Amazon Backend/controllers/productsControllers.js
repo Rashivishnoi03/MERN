@@ -45,8 +45,28 @@ catch(err){
     console.log(err);
 }
 }
+
+const deleteProducts = async(req, res) =>{
+   try{
+    const reqId = req.params.id;
+    
+     await productModel.findOneAndDelete({_id: reqId});
+    res.json({
+        status:"sucess",
+        message: "Product deleted successfully",
+    }); 
+}
+catch(err){
+    console.log(err.message);
+    res.status(500).json({
+        status:"error",
+        message:"An error occurred while deleting the product",
+    });
+}
+};
 module.exports = {
     getAllProducts,
     addProduct,
-    replaceProducts
+    replaceProducts,
+    deleteProducts,
 }
